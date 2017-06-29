@@ -37,6 +37,12 @@ app.get('/', function(req, res) {
 });
 
 app.post('/upload', upload.single('photo'), function (req, res, next){
-  res.render("upload", {file:req.file.filename});
+  //res.render("upload", {file:req.file.filename});
+  res.redirect('/photo/' + req.file.filename);
 });
+app.get('/photo/:file', function(req,res){
+  res.render("photo",{file:req.params.file});
+})
+
+
 app.listen(8080);
