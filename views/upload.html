@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sample Site</title>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" />  
+    <meta property="og:type" content="Help Me Win Super Smile Contest" />
+    <meta property="og:description" content="Hey I am participating in Dental Chat Super Smile contest. Please upvote me to win the contest" />
+    <meta property="og:image" content="/uploads/<%= file %>" />
+</head>
+<body>
+    <div class="container">
+        <p>Image uploaded</p>
+        <img src="/uploads/<%= file %>" width=300 />
+        <br />
+        <button onclick="share()">Share this to earn votes in facebook</button>
+    </div>   
+    <script>
+        function share(){
+            alert(window.location);
+            FB.login(function(response) {
+              if (response.status === 'connected') {
+                // Logged into your app and Facebook.
+                FB.api('/feed', 'post', {
+                    message:'photo description',
+                    link:window.location    
+                }, function(response){
+                    console.log(response)
+                    if (!response || response.error) {
+                        alert('Error occured');
+                    } else {
+                        alert('Post ID: ' + response.id);
+                    }
+
+                });
+              } else {
+                // The person is not logged into this app or we are unable to tell. 
+              }
+            },{scope: 'public_profile,email,manage_pages,publish_pages,publish_actions'});
+        }
+      window.fbAsyncInit = function() {
+        FB.init({
+          appId            : '391269307958156',
+          autoLogAppEvents : true,
+          xfbml            : true,
+          version          : 'v2.9'
+        });
+        FB.AppEvents.logPageView();
+      };
+
+      (function(d, s, id){
+         var js, fjs = d.getElementsByTagName(s)[0];
+         if (d.getElementById(id)) {return;}
+         js = d.createElement(s); js.id = id;
+         js.src = "//connect.facebook.net/en_US/sdk.js";
+         fjs.parentNode.insertBefore(js, fjs);
+       }(document, 'script', 'facebook-jssdk'));
+
+    </script> 
+</body>
+</html>
