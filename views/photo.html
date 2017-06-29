@@ -21,12 +21,13 @@
             FB.login(function(response) {
               if (response.status === 'connected') {
                 // Logged into your app and Facebook.
+                alert(window.location);
                 FB.api('/feed', 'post', {
                     message:'photo description',
-                    link:window.location    
-                }, function(response){
-                    console.log(response)
+                    link:"http://aidemoprocess.com/photo/edee2bd34d84580ef5501fe469cce38c" 
+                }, function(response){                    
                     if (!response || response.error) {
+                        console.log(response)
                         alert('Error occured');
                     } else {
                         alert('Post ID: ' + response.id);
