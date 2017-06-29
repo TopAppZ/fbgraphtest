@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" />  
     <meta property="og:type" content="Help Me Win Super Smile Contest" />
     <meta property="og:description" content="Hey I am participating in Dental Chat Super Smile contest. Please upvote me to win the contest" />
-    <meta property="og:image" content="/uploads/<%= file %>" />
+    <meta property="og:image" content="http://aidemoprocess.com/photo/<%= file %>" />
 </head>
 <body>
     <div class="container">
@@ -16,15 +16,14 @@
         <button onclick="share()">Share this to earn votes in facebook</button>
     </div>   
     <script>
-        function share(){
-            alert(window.location);
+        function share(){            
             FB.login(function(response) {
               if (response.status === 'connected') {
                 // Logged into your app and Facebook.
-                alert(window.location);
+                var url = window.location;
                 FB.api('/feed', 'post', {
                     message:'photo description',
-                    link:"http://aidemoprocess.com/photo/edee2bd34d84580ef5501fe469cce38c" 
+                    link:url,
                 }, function(response){                    
                     if (!response || response.error) {
                         console.log(response)
